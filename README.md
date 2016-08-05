@@ -2,12 +2,12 @@
 
 ## Doing
 
-- Realtime Datebase
-
-
 ## To Dos
 
+- Retrieve Data
 
 ## Done
 
 - Firebase CLI
+- Realtime Datebase
+- Save Data
