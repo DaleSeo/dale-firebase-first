@@ -2,8 +2,11 @@
 
 ## Doing
 
+- Realtime Datebase
+
 
 ## To Dos
 
 
 ## Done
+- Firebase CLI
