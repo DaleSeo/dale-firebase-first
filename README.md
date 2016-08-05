@@ -4,6 +4,8 @@
 
 ## Doing
 
+- Save Data (https://firebase.google.com/docs/database/web/save-data)
+
 ## To Dos
 
 - Retrieve Data
@@ -12,4 +14,3 @@
 
 - Firebase CLI
 - Realtime Datebase
-- Save Data
