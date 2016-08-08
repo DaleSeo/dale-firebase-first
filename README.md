@@ -4,11 +4,12 @@
 
 ## Doing
 
-- Save Data (https://firebase.google.com/docs/database/web/save-data)
+- Look into Quickstart Database
 
 ## To Dos
 
-- Retrieve Data
+- Save Data (https://firebase.google.com/docs/database/web/save-data)
+- Retrieve Data (https://firebase.google.com/docs/database/web/retrieve-data)
 
 ## Done
 

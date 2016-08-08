@@ -14,16 +14,35 @@
       storageBucket: "",
     };
     firebase.initializeApp(config);
+//
+//    firebase.database().ref('users').push({
+//      username: 'Dale Seo',
+//      email: 'dale.seo@gamil.com',
+//      profile_picture: 'http://www.profile.com'
+//    });
+//
+//    firebase.database().ref('users/-KObQi96IGBPUQv-PRMr').set({
+//      username: 'Kate Kim',
+//      email: 'kimrla3838@gmail.com',
+//      profile_picture: 'http://www.naver.com'
+//    });
 
-    function writeUserData(userId, name, email, imageUrl) {
-      firebase.database().ref('users/' + userId).set({
-        username: name,
-        email: email,
-        profile_picture: imageUrl
-      });
-    }
+//    var id = firebase.database().ref('users').push().key;
+//
+//        firebase.database().ref('users').child(id).set({
+//          username: 'Kate Kim',
+//          email: 'kimrla3838@gmail.com',
+//          profile_picture: 'http://www.naver.com'
+//        });
+    //firebase.database().ref('users').child('-KObVZMZD_SbjzpMa-O5').remove();
 
-    writeUserData(1, 'Dale Seo', 'dale.seo@gamil.com', 'http://www.pic.com');
+//    firebase.database().ref('users').on('child_added', function (data) {
+//      alert(data.key + data.username);
+//    })
+    firebase.database().ref('/users').once('value').then(function(snapshot) {
+      var username = snapshot.val()['-KOberDJK0WeYwWa-W1k'].username;
+      alert(username);
+    });
   </script>
 </head>
 <body>
