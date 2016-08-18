@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>First Firebase Database</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.3/css/bootstrap.min.css" integrity="sha384-MIwDKRSSImVFAZCVLtU0LMDdON6KVCrZHyVQQj6e8wIEJkW4tvwqXrbMIya1vriY" crossorigin="anonymous">
+  <script src="https://www.gstatic.com/firebasejs/3.2.1/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyBlxSB7hHcmupywqc_wrNoKoLxuto5arzw",
+      authDomain: "first-643b7.firebaseapp.com",
+      databaseURL: "https://first-643b7.firebaseio.com",
+      storageBucket: "",
+    };
+    firebase.initializeApp(config);
+
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        alert("User is signed in.")
+        console.log(JSON.stringify(user));
+        user.providerData.forEach(function (profile) {
+          console.log("Sign-in provider: "+profile.providerId);
+          console.log("  Provider-specific UID: "+profile.uid);
+          console.log("  Name: "+profile.displayName);
+          console.log("  Email: "+profile.email);
+          console.log("  Photo URL: "+profile.photoURL);
+        });
+      } else {
+        alert("No user is signed in.")
+      }
+    });
+
+    var email = 'kate.kim@gmail.com';
+    var password = 'yeji0818';
+//    firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+//      console.log(JSON.stringify(error));
+//    });
+
+//    firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+//      console.log(JSON.stringify(error));
+//    });
+
+    firebase.auth().signOut().then(function() {
+      // Sign-out successful.
+    }, function(error) {
+      // An error happened.
+    });
+
+    var user = firebase.auth().currentUser;
+
+    if (user != null) {
+      console.log(JSON.stringify(user));
+    }
+
+    if (user != null) {
+      user.providerData.forEach(function (profile) {
+        console.log("Sign-in provider: "+profile.providerId);
+        console.log("  Provider-specific UID: "+profile.uid);
+        console.log("  Name: "+profile.displayName);
+        console.log("  Email: "+profile.email);
+        console.log("  Photo URL: "+profile.photoURL);
+      });
+    }
+  </script>
+</head>
+<body>
+
+</body>
+</html>

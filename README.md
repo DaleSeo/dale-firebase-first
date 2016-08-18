@@ -4,12 +4,10 @@
 
 ## Doing
 
-- Look into Quickstart Database
+- Writing login.html
 
 ## To Dos
-
-- Save Data (https://firebase.google.com/docs/database/web/save-data)
-- Retrieve Data (https://firebase.google.com/docs/database/web/retrieve-data)
+- Firebase Auth
 
 ## Done
 

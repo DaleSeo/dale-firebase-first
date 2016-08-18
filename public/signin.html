@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>First Firebase Sign in</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.3/css/bootstrap.min.css" integrity="sha384-MIwDKRSSImVFAZCVLtU0LMDdON6KVCrZHyVQQj6e8wIEJkW4tvwqXrbMIya1vriY" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/3.2.1/firebase.js"></script>
+  <style>
+    @media (min-width: 544px) {
+      .bd-example {
+        padding: 1.5rem;
+        margin-right: 0;
+        margin-bottom: 0;
+        margin-left: 0;
+        border-width: .2rem;
+      }
+    }
+  </style>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyBlxSB7hHcmupywqc_wrNoKoLxuto5arzw",
+      authDomain: "first-643b7.firebaseapp.com",
+      databaseURL: "https://first-643b7.firebaseio.com",
+      storageBucket: "",
+    };
+    firebase.initializeApp(config);
+
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        $('#info').text(JSON.stringify(user));
+      } else {
+        $('#info').text("No user is signed in.");
+      }
+    });
+
+    function login() {
+      var email = $('#email').val();
+      var password = $('#password').val();
+      firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+        console.log(JSON.stringify(error));
+      });
+    }
+
+    function logout() {
+
+    }
+  </script>
+</head>
+<body>
+  <div class="bd-example">
+    <form>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
+        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" id="password" placeholder="Password">
+      </div>
+      <button type="button" class="btn btn-primary" onclick="login()">Log In</button>
+      <button type="button" class="btn btn-primary" onclick="logout()">Log Out</button>
+    </form>
+  </div>
+  <div class="bd-example">
+    <ul class="list-group">
+      <li id="info" class="list-group-item">No user is signed in.</li>
+    </ul>
+  </div>
+</body>
+</html>
