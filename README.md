@@ -4,7 +4,7 @@
 
 ## Doing
 
-- Writing login.html
+- Develop mypage with AngularJS
 
 ## To Dos
 - Firebase Auth
