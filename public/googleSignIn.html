@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>First Firebase Google Sign in</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.3/css/bootstrap.min.css" integrity="sha384-MIwDKRSSImVFAZCVLtU0LMDdON6KVCrZHyVQQj6e8wIEJkW4tvwqXrbMIya1vriY" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/3.2.1/firebase.js"></script>
+  <style>
+    @media (min-width: 544px) {
+      .bd-example {
+        padding: 1.5rem;
+        margin-right: 0;
+        margin-bottom: 0;
+        margin-left: 0;
+        border-width: .2rem;
+      }
+    }
+  </style>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyBlxSB7hHcmupywqc_wrNoKoLxuto5arzw",
+      authDomain: "first-643b7.firebaseapp.com",
+      databaseURL: "https://first-643b7.firebaseio.com",
+      storageBucket: "",
+    };
+    firebase.initializeApp(config);
+
+    firebase.auth().onAuthStateChanged(function(user) {
+      $('#info').html('');
+      if (user) {
+        var keys = ['displayName', 'email', 'emailVerified', 'isAnonymous', 'photoURL', 'providerData', 'providerId', 'refreshToken', 'uid'];
+        var output = '';
+        for (var i in keys) {
+          key = keys[i];
+          $('<li>').addClass('list-group-item').text(key + ": " + user[key]).appendTo($('#info'));
+        }
+      } else {
+        $('<li>').addClass('list-group-item').text("No user is signed in.").appendTo($('#info'));
+      }
+    });
+
+    var provider = new firebase.auth.GoogleAuthProvider();
+
+    function login() {
+      firebase.auth().signInWithRedirect(provider);
+    }
+
+    firebase.auth().getRedirectResult().then(function(result) {
+      if (result.credential) {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        var token = result.credential.accessToken;
+        console.dir(token);
+        var user = result.user;
+        console.dir(user);
+      }
+      // The signed-in user info.
+      var user = result.user;
+    }).catch(function(error) {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      // The email of the user's account used.
+      var email = error.email;
+      // The firebase.auth.AuthCredential type that was used.
+      var credential = error.credential;
+      // ...
+    });
+
+    function logout() {
+      firebase.auth().signOut().then(function() {
+        alert('Logged out successfully.');
+        $('#email').val('');
+        $('#password').val('');
+        $('#email').prop('readonly', false);
+        $('#password').prop('readonly', false);
+      }, function(error) {
+        console.dir(error);
+      });
+    }
+  </script>
+</head>
+<body>
+<div class="bd-example">
+  <form>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
+      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" class="form-control" id="password" placeholder="Password">
+    </div>
+    <button type="button" class="btn btn-primary" onclick="login()">Log In</button>
+    <button type="button" class="btn btn-primary" onclick="logout()">Log Out</button>
+  </form>
+</div>
+<div class="bd-example">
+  <ul id="info" class="list-group"/>
+</div>
+</body>
+</html>

@@ -7,9 +7,11 @@
 - Develop mypage with AngularJS
 
 ## To Dos
-- Firebase Auth
+
+- Firebase Storage
 
 ## Done
 
 - Firebase CLI
 - Realtime Datebase
+- Firebase Auth
